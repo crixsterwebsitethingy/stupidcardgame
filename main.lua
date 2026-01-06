@@ -1,6 +1,6 @@
 
 function love.load()
-    local fontmenu = love.graphics.newFont("assets/Montserrat-Regular.ttf", 24)
+    local fontmenu = love.graphics.newFont("assets/fonts/Montserrat-Regular.ttf", 24)
     love.graphics.setFont(fontmenu)
 end
 function love.update(dt)
