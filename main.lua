@@ -1,5 +1,7 @@
 -- © 2026 crix_0z, All Rights Reserved.
 -- This code is licensed under the MIT License.
+local game = require("game")
+local current_instance = game:new()
 function love.load()
     local fontmenu = love.graphics.newFont("assets/fonts/Montserrat-Regular.ttf", 24)
     love.graphics.setFont(fontmenu)
