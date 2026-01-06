@@ -1,0 +1,2 @@
+-- © 2026 crix_0z, All Rights Reserved.
+-- This code is licensed under the MIT License.
