@@ -13,6 +13,7 @@ function game:new()
     instance.score = 0
     instance.target = 0
     instance.jokers = {}
+    instance.chosen = false
     instance.possibleCards = {
         ["2_of_hearts"] = {amt = 1, pointvalue = 2},
         ["3_of_hearts"] = {amt = 1, pointvalue = 3},
@@ -100,6 +101,14 @@ end
 function game:Start(date)
     self.state = "r1"
     self.startDate = date
+end
+function game:choosetarget(round)
+    if not chosen then
+        local posssible = {50, 70, 100, 150, 200}
+        self.target = posssible[math.random(1, #posssible)]
+        chosen = true
+    end
+
 end
 
 
