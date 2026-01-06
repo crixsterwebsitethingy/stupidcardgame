@@ -1,0 +1,15 @@
+Hello dear modders
+Thank you for deciding to mod my simple and stupid game
+
+Instructions:
+1. Go to main.lua and change the "mods_present" variable to **true**
+2. Create you modname.lua file
+3. Require "game"
+4. Use the following methods to create your mod: game:mods_..... 
+                                                            ^ You will get options of all the available methods, you can read through game.lua to find out the game logic.
+I will also leave a little documentation for you here:
+
+format: type, name, parent script, description
+
+
+func mods_addCard(card: string, amt: integer, pointvalue: integer) [game.lua] -> Adds a card to the "possibleCards dictionary, which holds all cards in the game along with their amount and point values. Arguments: "card" = the name of your card, use underlines(_) instead of spaces; "amt" = amount of cards present in the deck; pointValue = how many points each card gives inside a hand (multiplied by the hand multiplier)\
