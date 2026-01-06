@@ -3,7 +3,7 @@
 local game = {}
 game.__index = game
 -- Modding Functions
-function game:mods_addCard(card, amt, pointvalue)
+--[[function game:mods_addCard(card, amt, pointvalue)
     -- Adds a card to the possibleCards table
     self.possibleCards[card] = {amt = amt, pointvalue = pointvalue}
 end
@@ -28,7 +28,7 @@ function game:mods_addJokers(jokerlist, effectList)
             print("Failed to load mod: Joker list and Effect list must be the same length with corresponding entries.")
         end
     end
-end
+end]]
 function game:new()
     -- 000 DO NOT MODIFY CONTENTS OF THIS CONSTRUCTOR FUNCTION!! USE MODDING METHODS TO DO SO!! 000 --
     local instance = setmetatable({}, game)
@@ -100,10 +100,11 @@ function game:new()
     }
     return instance
 end
-function game:LoadMods(name)
+--[[function game:LoadMods(name)
     self.modError = name
     print("Loading mods...")
-
+    print("IF THE FOLLOWING MESSSAGE IS AN ERROR, THE MOD DOES NOT EXIST")
+    local test = require(name)
     local ok, mod = pcall(require, name)
     if not ok then
         self.state = "fail_load"
@@ -123,7 +124,7 @@ function game:LoadMods(name)
         print("Failed to load mods: "..self.modError)
     end
     
-end
+end]]
 function game:registerHand()
     local handsize = self.handsize
     local cardList = {}

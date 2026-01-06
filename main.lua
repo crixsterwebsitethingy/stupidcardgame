@@ -1,15 +1,16 @@
 -- © 2026 crix_0z, All Rights Reserved.
 -- This code is licensed under the MIT License.
 
-local mods_present = true --FOR MODDERS, CHANGE VALUE TO TRUE 
+--
 local game = require("game")
 local current_instance 
 local date = os.date()
+--local modname = nil 
 function love.load() 
     current_instance = game:new()
-    if mods_present then
-        current_instance:LoadMods("Johhnys_Jokers") -- ADD YOUR  MOD NAME 
-    end
+    --[[if mods_present then  
+        current_instance:LoadMods(modname) 
+    end]]
 end
 function love.update(dt)
     if current_instance.state == "r1" then
@@ -24,9 +25,10 @@ end
 function love.draw()
     local menufont = love.graphics.newFont("assets/fonts/Montserrat-Regular.ttf", 24)
     local menustartfont = love.graphics.newFont("assets/fonts/Montserrat-MediumItalic.ttf", 18)
-    if current_instance.state == "mod_failed_to_load" then
+    if current_instance.state == "fail_load" then
         love.graphics.clear(1, 1, 1)
-        love.graphics.print("Failed to load mods. Check console for errors.", menufont, love.graphics.getWidth() / 2 - 200, love.graphics.getHeight() / 2 - 20, 0, 1, 1)
+        love.graphics.setColor(1, 0, 0)
+        love.graphics.print("failed to load mod: "..modname.." with exit code 1", menufont, love.graphics.getWidth() / 2 - 400, love.graphics.getHeight() / 2 - 20, 0, 1, 1)
 
     end
     if current_instance.state == "menu" then
