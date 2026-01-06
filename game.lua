@@ -98,7 +98,7 @@ function game:SetHand(hand)
     self.hand = hand
 end
 function game:Start(date)
-    self.state = "early"
+    self.state = "r1"
     self.startDate = date
 end
 
