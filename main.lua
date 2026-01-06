@@ -3,21 +3,21 @@
 local game = require("game")
 local current_instance = game:new()
 function love.load()
-    local fontmenu = love.graphics.newFont("assets/fonts/Montserrat-Regular.ttf", 24)
-    love.graphics.setFont(fontmenu)
 end
 function love.update(dt)
 
 end
 
 function love.draw()
-    love.graphics.print("A Stupid Card Game", love.graphics.getWidth() / 2 - 120, 20, 0, 1, 1)
+    local menufont = love.graphics.newFont("assets/fonts/Montserrat-Regular.ttf", 24)
+    local menustartfont = love.graphics.newFont("assets/fonts/Montserrat-MediumItalic.ttf", 18)
+    love.graphics.print("A Stupid Card Game", menufont, love.graphics.getWidth() / 2 - 120, 20, 0, 1, 1)
     love.graphics.setBackgroundColor(0, 0.4, 0.5)
-    love.graphics.rectangle("fill", 20, 70 , love.graphics.getWidth() - 40 , 50)
-end
+    love.graphics.setColor(0, 0.3, 0.2)
+    love.graphics.rectangle("fill", 20, 75 , love.graphics.getWidth() - 40 , 50)
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.print("Press Enter to start a Game", menustartfont, love.graphics.getWidth() / 2 - 125, 85, 0, 1, 1)
 
-function love.load()
-   
 end
 
 
