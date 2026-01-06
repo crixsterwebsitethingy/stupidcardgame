@@ -1,0 +1,15 @@
+Base Game Content License
+
+All base game assets (including, but not limited to images, artwork, card data,
+UI graphics, and audio assets) are © 2026 crix_0z.
+
+You may:
+- Use these assets inside mods created specifically for this game
+- Distribute mods that depend on these assets
+- Create texture packs or visual modifications that alter the appearance of
+  assets, with prior written approval from crix_0z
+
+You may NOT:
+- Claim ownership of the base game assets
+- Redistribute the assets standalone or outside this game
+- Sell or monetize the assets outside this game
