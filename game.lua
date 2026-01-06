@@ -2,7 +2,7 @@
 -- This code is licensed under the MIT License.
 local game = {}
 game.__index = game
-function game:addCard(card, amt, pointvalue)
+function game:mods_addCard(card, amt, pointvalue)
     -- Adds a card to the possibleCards table
     self.possibleCards[card] = {amt = amt, pointvalue = pointvalue}
 end
@@ -70,7 +70,29 @@ function game:new()
     return instance
 end
 function game:LoadMods()
-
+    print("Mods Found!")
+    -- This is for v2.0 when modding is implemented
+end
+function game:registerHand()
+    local handsize = 12
+    local cardList = {}
+    for key, value in pairs(self.possibleCards) do
+        table.insert(cardList, {name = key, amt = value.amt, pointvalue = value.pointvalue})
+    end
+    local chosenCards = {}
+    for i = 1, handsize do
+        local j = math.random(1, #cardList)
+        if not table.find(chosenCards, cardList[j]) then
+            table.insert(chosenCards, cardList[j])
+        end
+        table.remove(cardList, j)
+    end
+    self:SetHand(chosenCards)
+    print("Hand Registered")
+    print(chosenCards)
+end
+function game:GetHand()
+    return self.hand
 end
 function game:SetHand(hand)
     self.hand = hand
