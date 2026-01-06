@@ -1,3 +1,4 @@
+
 x = 1
 y = 1
 function love.load()
@@ -13,3 +14,12 @@ function love.draw()
     love.graphics.setBackgroundColor(0, 0.4, 0.5)
     love.graphics.rectangle("fill", 20, 70 , love.graphics.getWidth() - 40 , 50)
 end
+
+function love.load()
+    print("stupidcardgame booted")
+end
+
+function love.draw()
+    love.graphics.print("stupidcardgame is running", 100, 100)
+end
+
