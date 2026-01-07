@@ -1,0 +1,3 @@
+For all cards in assets\cards\:
+https://en.wikipedia.org/wiki/Standard_52-card_deck#/media/File:Piatnikcards.jpg
+Credit to https://commons.wikimedia.org/wiki/User:Trainler
