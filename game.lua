@@ -33,10 +33,12 @@ function game:new()
     -- 000 DO NOT MODIFY CONTENTS OF THIS CONSTRUCTOR FUNCTION!! USE MODDING METHODS TO DO SO!! 000 --
     local instance = setmetatable({}, game)
     instance.state = "menu"
-    instance.round_state = 0 -- 0 = nil, 1 = hand registered: to draw, 2 = finished, 3 = clear
+    instance.round_state = 0 -- 0 = nil, 1 = hand registered: to draw, 2 = finished, 3 = clear\
+    instance.hand_state = 0 -- nil = no hand, 1 = hand drawn
     instance.hand = {}
     instance.score = 0
     instance.target = 0
+    instance.hand0 = false
     instance.jokers = {
         --placeholder names ig
         ["Johhny the Magician"] = {effect = "doublepoints"},
@@ -47,7 +49,7 @@ function game:new()
     instance.handsize = 12
     instance.modError = ""
     instance.possibleCards = {
-        ["2_of_hearts"] = {amt = 1, pointvalue = 2},
+        --[[["2_of_hearts"] = {amt = 1, pointvalue = 2},
         ["3_of_hearts"] = {amt = 1, pointvalue = 3},
         ["4_of_hearts"] = {amt = 1, pointvalue = 4},
         ["5_of_hearts"] = {amt = 1, pointvalue = 5},
@@ -85,7 +87,7 @@ function game:new()
         ["jack_of_clubs"] = {amt = 1, pointvalue = 10},
         ["queen_of_clubs"] = {amt = 1, pointvalue = 10},
         ["king_of_clubs"] = {amt = 1, pointvalue = 10},
-        ["ace_of_clubs"] = {amt = 1, pointvalue = 11},
+        ["ace_of_clubs"] = {amt = 1, pointvalue = 11},]]
         ["2_of_spades"] = {amt = 1, pointvalue = 2},
         ["3_of_spades"] = {amt = 1, pointvalue = 3},
         ["4_of_spades"] = {amt = 1, pointvalue = 4},
@@ -128,21 +130,40 @@ end
     
 end]]
 function game:registerHand()
-    local handsize = self.handsize
+    if not self.hand0 then
+        local handsize = self.handsize
     local cardList = {}
     for key, value in pairs(self.possibleCards) do
-        table.insert(cardList, {name = key, amt = value.amt, pointvalue = value.pointvalue})
+        if #self.hand < 12 then
+            table.insert(cardList, {name = key, amt = value.amt, pointvalue = value.pointvalue})
+        end
     end
     local chosenCards = {}
-    for i = 1, handsize do
+    local a = {}
+    for i = 1, handsize do 
+        if self.hand_state == 1 then
+            break
+        end
         local j = math.random(1, #cardList)
         table.insert(chosenCards, cardList[j])
         table.remove(cardList, j)
+        
     end
-    self:SetHand(chosenCards)
+    --print("Hand Registered")
+    local names = {}
+    for key, value in pairs(chosenCards) do
+       --print("Card "..value.name..": "..value.amt.." (Point Value: "..value.pointvalue..")")
+        table.insert(names, value.name)
+    end
+    self:SetHand(names)
     self.round_state = 1 -- draw hand
-    print("Hand Registered")
-    print(chosenCards)
+    self.hand0 = true
+    return names
+    end
+    
+end
+function game:changehandstate(state)
+    self.hand_state = state
 end
 function game:GetHand()
     return self.hand
@@ -157,10 +178,7 @@ end
 function game:choosetarget(round)
     if not self.chosen then
         local posssible = {50, 70, 100, 150, 200, 250}
-        if self.target == 250 then
-            self.target = posssible[math.random(0, #posssible)] * round
-        end
-        self.target = posssible[math.random(0, #posssible)] * round
+        self.target = posssible[math.random(0, #posssible)] * tonumber(round)
         print("Target chosen: "..self.target)
         self.chosen = true
     end

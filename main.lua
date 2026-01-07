@@ -5,7 +5,8 @@
 local game = require("game")
 local current_instance 
 local date = os.date()
---local modname = nil 
+--local modname = nil
+            local cards = {}
 function love.load() 
     current_instance = game:new()
     --[[if mods_present then  
@@ -16,6 +17,10 @@ function love.update(dt)
     if current_instance.state == "r1" then
         current_instance:choosetarget(1)
     end
+        if current_instance.hand_state == 0 then
+            cards = current_instance:registerHand()
+           -- current_instance:changehandstate(1)
+        end
 end
 function love.keypressed(key)
     if key == "return" then
@@ -41,22 +46,26 @@ function love.draw()
         love.graphics.print("Press Enter to start a Game", menustartfont, love.graphics.getWidth() / 2 - 125, 85, 0, 1, 1)
     end
     if current_instance.state == "r1" then
-        if current_instance.round_state == 1 then
-            local startx = love.graphics.getWidth() - 1000
-            --tesst
-            love.graphics.print("drawing hand", 500, 200)
-            local hand = current_instance:GetHand()
-            local function drawCard(card, x, y)
-
-            end
-        end
+        
         love.graphics.setColor(0.8, 0.792, 0.255)
         love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth() - 600, love.graphics.getHeight())
         love.graphics.setColor(0,0,0)
         love.graphics.print("ROUND 1", menustartfont, 50, 20, 0, 1, 1)
         love.graphics.print("Score: "..current_instance.score, menustartfont, 50, 50, 0, 1, 1)
         love.graphics.print("Target: "..current_instance.target, menustartfont, 50, 80, 0, 1, 1)
-    end
+        local function drawCard(card, x, y)
+            local cardImage = love.graphics.newImage("assets/cards/"..card..".png")
+                love.graphics.setColor(1,1,1)
+                love.graphics.draw(cardImage, x, y, 0, 1, 1)
 
-    
+            end
+        
+        if current_instance.round_state == 1 then
+            local startx = love.graphics.getWidth() - 600
+            local cards0 = current_instance:GetHand()
+            for i = 1, #cards0 do
+                drawCard(cards0[i], startx + i * 35, 400)
+            end
+        end
+    end
 end
