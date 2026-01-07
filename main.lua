@@ -20,6 +20,7 @@ end
 function love.keypressed(key)
     if key == "return" then
          current_instance:Start(date)
+         current_instance:registerHand()
      end
 end
 function love.draw()
@@ -40,6 +41,15 @@ function love.draw()
         love.graphics.print("Press Enter to start a Game", menustartfont, love.graphics.getWidth() / 2 - 125, 85, 0, 1, 1)
     end
     if current_instance.state == "r1" then
+        if current_instance.round_state == 1 then
+            local startx = love.graphics.getWidth() - 1000
+            --tesst
+            love.graphics.print("drawing hand", 500, 200)
+            local hand = current_instance:GetHand()
+            local function drawCard(card, x, y)
+
+            end
+        end
         love.graphics.setColor(0.8, 0.792, 0.255)
         love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth() - 600, love.graphics.getHeight())
         love.graphics.setColor(0,0,0)
@@ -47,7 +57,6 @@ function love.draw()
         love.graphics.print("Score: "..current_instance.score, menustartfont, 50, 50, 0, 1, 1)
         love.graphics.print("Target: "..current_instance.target, menustartfont, 50, 80, 0, 1, 1)
     end
+
     
 end
-
-

@@ -33,10 +33,12 @@ function game:new()
     -- 000 DO NOT MODIFY CONTENTS OF THIS CONSTRUCTOR FUNCTION!! USE MODDING METHODS TO DO SO!! 000 --
     local instance = setmetatable({}, game)
     instance.state = "menu"
+    instance.round_state = 0 -- 0 = nil, 1 = hand registered: to draw, 2 = finished, 3 = clear
     instance.hand = {}
     instance.score = 0
     instance.target = 0
     instance.jokers = {
+        --placeholder names ig
         ["Johhny the Magician"] = {effect = "doublepoints"},
         ["Lucy the Trickster"] = {effect = "extra_attempt"},
         ["Sam the Wildcard"] = {effect = "lower_target"}
@@ -138,6 +140,7 @@ function game:registerHand()
         table.remove(cardList, j)
     end
     self:SetHand(chosenCards)
+    self.round_state = 1 -- draw hand
     print("Hand Registered")
     print(chosenCards)
 end
@@ -153,8 +156,12 @@ function game:Start(date)
 end
 function game:choosetarget(round)
     if not self.chosen then
-        local posssible = {50, 70, 100, 150, 200}
-        self.target = posssible[math.random(0, #posssible + 1)] * round
+        local posssible = {50, 70, 100, 150, 200, 250}
+        if self.target == 250 then
+            self.target = posssible[math.random(0, #posssible)] * round
+        end
+        self.target = posssible[math.random(0, #posssible)] * round
+        print("Target chosen: "..self.target)
         self.chosen = true
     end
 
